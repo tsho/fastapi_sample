@@ -11,7 +11,6 @@ clf = pickle.load(open("model.pickle", "rb"))
 
 class Predict(BaseModel):
     PassengerId: int
-    Survived: int
     Pclass: int
     Name: str
     Sex: str
@@ -33,8 +32,7 @@ def _titanic_predict(df):
                       'Parch', 'Ticket', 'Cabin', 'Fare']
     df.drop(delete_columns, axis=1, inplace=True)
 
-    df_test = df.drop('Survived', axis=1)
-    return clf.predict_proba(df_test)
+    return clf.predict_proba(df)
 
 
 @app.get("/")
